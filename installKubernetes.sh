@@ -1,9 +1,9 @@
 #!/bin/bash
 ###############################################
-# installKubeadm.sh
+# installKubernetes.sh
 # usage:
-# For worker nodes: ./installKubeadm.sh worker
-# For master nodes: ./installKubeadm.sh master
+# For worker nodes: ./installKubernetes.sh worker
+# For master nodes: ./installKubernetes.sh master
 ###############################################
 
 cidr=$(ip a show enp0s8 | grep global | awk '{print $2}')
