@@ -14,7 +14,7 @@ setupKubectl(){
   mkdir -p $HOME/.kube
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
-  kubectl completion bash >> ~/.bashrc
+  # kubectl completion bash >> ~/.bashrc
 
   return
 }
@@ -35,6 +35,8 @@ setupKubectl
 kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
 
 tail -2 /vagrant/kubemasterOutput.txt > /vagrant/setupWorker.sh && chmod +x /vagrant/setupWorker.sh
+
+kubectl completion bash > /etc/bash_completion.d/kubectl
 
 return
 }
@@ -89,7 +91,7 @@ EOF
 sysctl --system
 
 ### install kubeadm/kublet
-sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl etcd-client
 
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
