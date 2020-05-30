@@ -8,7 +8,7 @@ Vagrant: https://www.vagrantup.com/downloads
 
 Virtualbox: https://www.virtualbox.org/wiki/Downloads
 
-The Vagrant images are based on [Ubuntu Ironic64](https://app.vagrantup.com/ubuntu/boxes/bionic64). There's no real preference for Ubuntu besides me wanting to use it.  Please feel free to refer to the [Kubeadm documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl) for instrucions on installing on other Linux distributions.
+The Vagrant images are based on [Ubuntu Bionic64](https://app.vagrantup.com/ubuntu/boxes/bionic64). There's no real preference for Ubuntu besides me wanting to use it.  Please feel free to refer to the [Kubeadm documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl) for instrucions on installing on other Linux distributions.
 
 ## Clone and Install
 
