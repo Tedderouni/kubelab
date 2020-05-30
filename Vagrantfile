@@ -1,5 +1,11 @@
+MASTER_CPU = 2
+MASTER_RAM = 2048
+
+WORKER_CPU = 4
+WORKER_RAM = 4096
+WORKER_COUNT = 2
+
 BOX_IMAGE = "ubuntu/bionic64"
-NODE_COUNT = 2
 
 Vagrant.configure("2") do |config|
 
@@ -8,20 +14,20 @@ Vagrant.configure("2") do |config|
     kubeconfig.vm.hostname = "master"
     kubeconfig.vm.network "private_network", type: "dhcp"
     kubeconfig.vm.provider "virtualbox" do |vb|
-      vb.cpus = 2
-      vb.memory = 2048
+      vb.cpus = MASTER_CPU
+      vb.memory = MASTER_RAM
     end
     kubeconfig.vm.provision "shell", inline: "sudo /vagrant/installKubernetes.sh master"
   end
 
-  (1..NODE_COUNT).each do |i|
+  (1..WORKER_COUNT).each do |i|
     config.vm.define "worker#{i}" do |kubeconfig|
       kubeconfig.vm.box = BOX_IMAGE
       kubeconfig.vm.hostname = "worker#{i}"
       kubeconfig.vm.network "private_network", type: "dhcp"
       kubeconfig.vm.provider "virtualbox" do |vb|
-        vb.cpus = 4
-        vb.memory = 4096
+        vb.cpus = WORKER_CPU
+        vb.memory = WORKER_RAM
       end
       kubeconfig.vm.provision "shell", inline: "sudo /vagrant/installKubernetes.sh worker"
     end
