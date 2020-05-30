@@ -6,8 +6,8 @@
 # For master nodes: ./installKubernetes.sh master
 ###############################################
 
-cidr=$(ip a show enp0s8 | grep global | awk '{print $2}')
-ip=${cidr::-3}
+CIDR=$(ip a show enp0s8 | grep global | awk '{print $2}')
+IP=${CIDR::-3}
 
 setupKubectl(){
 
@@ -25,27 +25,27 @@ fi
 
 
 setupMaster(){
-### initiate kubeadm
-kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=$ip | tee -a /vagrant/kubemasterOutput.txt
+  ### initiate kubeadm
+  kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=$IP | tee -a /vagrant/kubemasterOutput.txt
 
-setupKubectl
+  setupKubectl
 
-### install network add-on for calico
-kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
+  ### install network add-on for calico
+  kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
 
-tail -2 /vagrant/kubemasterOutput.txt > /vagrant/setupWorker.sh && chmod +x /vagrant/setupWorker.sh
+  tail -2 /vagrant/kubemasterOutput.txt > /vagrant/setupWorker.sh && chmod +x /vagrant/setupWorker.sh
 
-kubectl completion bash > /etc/bash_completion.d/kubectl
+  kubectl completion bash > /etc/bash_completion.d/kubectl
 
-return
+  return
 }
 
 
 setupWorker(){
-### initiate kubeadm join to cluster
+  ### initiate kubeadm join to cluster
   /vagrant/setupWorker.sh
 
-  echo Environment="'KUBELET_EXTRA_ARGS=--node-ip=$ip'" | sudo tee -a /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+  echo Environment="'KUBELET_EXTRA_ARGS=--node-ip=$IP'" | sudo tee -a /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 
   systemctl daemon-reload && systemctl restart kubelet
 
