@@ -25,12 +25,15 @@ fi
 
 
 setupMaster(){
-  ### initiate kubeadm
+  ### Initiate kubeadm
+  echo "Initiate kubeadm cluster..." && sleep 1
+  ### For Vagrant/Virtualbox environments you need to set --apiserver-advertise-address=$IP
   kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=$IP | tee -a /vagrant/kubemasterOutput.txt
 
   setupKubectl
 
-  ### install network add-on for calico
+  ### Install network add-on for Calico
+  echo "Install network add-on for Calico..." && sleep 1
   kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
 
   tail -2 /vagrant/kubemasterOutput.txt > /vagrant/setupWorker.sh && chmod +x /vagrant/setupWorker.sh
@@ -42,9 +45,12 @@ setupMaster(){
 
 
 setupWorker(){
-  ### initiate kubeadm join to cluster
+  ### Initiate kubeadm join to cluster
+  echo "Initiate kubeadm join to cluster..." && sleep 1
   /vagrant/setupWorker.sh
 
+  ### Related to --apiserver-advertise-address parameter on master node.
+  ### This allows the worker node to avertise the correct IP.
   echo Environment="'KUBELET_EXTRA_ARGS=--node-ip=$IP'" | sudo tee -a /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 
   systemctl daemon-reload && systemctl restart kubelet
@@ -56,6 +62,7 @@ setupWorker(){
 ### Install Docker CE
 ### Set up the repository:
 ### Install packages to allow apt to use a repository over HTTPS
+echo "Update and install Docker CE..." && sleep 1
 apt-get update && apt-get install -y apt-transport-https ca-certificates curl software-properties-common gnupg-agent
 
 ### Add Docker’s official GPG key
@@ -64,7 +71,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 ### Add Docker apt repository.
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
-### Install Docker CE.
+### Install Docker CE
 apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io
 #apt-get update && apt-get install -y containerd.io=1.2.13-1 docker-ce=5:19.03.8~3-0~ubuntu-$(lsb_release -cs) docker-ce-cli=5:19.03.8~3-0~ubuntu-$(lsb_release -cs)
 
@@ -93,7 +100,8 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system
 
-### install kubeadm/kublet
+### Install kubeadm/kublet
+echo "Install kubeadm/kublet..." && sleep 1
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl etcd-client
 
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
