@@ -29,10 +29,12 @@ vagrant ssh master
 sudo kubectl get nodes -o wide
 ```
 
-For those of you not interested in typing sudo all of the time. You can runn the following command to copy configure the kubectl config for the current user.
+For those of you not interested in typing sudo all of the time. You can run the following command to copy configure the kubectl config for the current user.
 
 ```Bash
 /vagrant/installKubernetes.sh user
+
+kubectl get nodes -o wide
 ```
 
 ### Login to Worker Nodes (Optional)
