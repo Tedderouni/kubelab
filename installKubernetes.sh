@@ -45,6 +45,10 @@ setupWorker(){
 ### initiate kubeadm join to cluster
   /vagrant/setupWorker.sh
 
+  echo Environment="'KUBELET_EXTRA_ARGS=--node-ip=$ip'" | sudo tee -a /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+
+  systemctl daemon-reload && systemctl restart kubelet
+
   return
 }
 
