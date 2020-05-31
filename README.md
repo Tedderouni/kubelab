@@ -78,6 +78,8 @@ sudo kubectl get nodes -o wide
 For those of you not interested in typing sudo all of the time. You can run the following command to configure the kubectl config for the current user.
 
 ```Bash
+vagrant ssh master
+
 /vagrant/installKubernetes.sh user
 ```
 
