@@ -79,7 +79,7 @@ kubectl get nodes -o wide
 
 ### Kubectl (Optional)
 
-For those of you not interested in using the root account. You can run the following command to configure the kubectl config for the current user.
+For those of you not interested in using the root account. You can run the following command to configure the kubectl config for the vagrant user.
 
 ```Bash
 vagrant ssh master
