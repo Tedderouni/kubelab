@@ -9,6 +9,7 @@
 CIDR=$(ip a show enp0s8 | grep global | awk '{print $2}')
 IP=${CIDR::-3}
 
+
 setupKubectl(){
 
   mkdir -p $HOME/.kube

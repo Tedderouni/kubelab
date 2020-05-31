@@ -1,6 +1,6 @@
 # kubelab
 
-A simple lab to using [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/) to learn to setup and manage a Kubernetes environment based on [Kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm/).
+A simple lab using [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/) to learn to setup and manage a Kubernetes environment based on [Kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm/).
 
 ## Requirements:
 
