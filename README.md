@@ -79,8 +79,6 @@ For those of you not interested in typing sudo all of the time. You can run the 
 
 ```Bash
 /vagrant/installKubernetes.sh user
-
-kubectl get nodes -o wide
 ```
 
 ### Login to Worker Nodes (Optional)
