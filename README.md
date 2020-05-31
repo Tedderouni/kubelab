@@ -60,8 +60,8 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = false
 end
 ```
-Once the resource configuration has been set, bring up the Vagrant environment
 
+Once the resource configuration has been set, bring up the Vagrant environment
 
 ```Bash
 vagrant up
@@ -75,7 +75,7 @@ vagrant ssh master
 sudo kubectl get nodes -o wide
 ```
 
-For those of you not interested in typing sudo all of the time. You can run the following command to copy configure the kubectl config for the current user.
+For those of you not interested in typing sudo all of the time. You can run the following command to configure the kubectl config for the current user.
 
 ```Bash
 /vagrant/installKubernetes.sh user
