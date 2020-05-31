@@ -3,6 +3,7 @@ MASTER_RAM = 2048
 
 WORKER_CPU = 4
 WORKER_RAM = 4096
+
 WORKER_COUNT = 2
 
 BOX_IMAGE = "ubuntu/bionic64"
