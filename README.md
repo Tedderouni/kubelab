@@ -1,6 +1,6 @@
 # kubelab
 
-A simple lab using [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/) to learn to setup and manage a Kubernetes environment based on [Kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm/).
+A simple lab using [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/) to learn to setup and manage a Kubernetes environments based on [Kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm/).
 
 ## Requirements:
 
@@ -72,12 +72,14 @@ vagrant up
 ```Bash
 vagrant ssh master
 
-sudo kubectl get nodes -o wide
+sudo su -
+
+kubectl get nodes -o wide
 ```
 
 ### Kubectl (Optional)
 
-For those of you not interested in typing sudo all of the time. You can run the following command to configure the kubectl config for the current user.
+For those of you not interested in using the root account. You can run the following command to configure the kubectl config for the current user.
 
 ```Bash
 vagrant ssh master

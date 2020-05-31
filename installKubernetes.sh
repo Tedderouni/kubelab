@@ -26,15 +26,17 @@ fi
 
 
 setupMaster(){
-  ### Initiate kubeadm
-  echo "Initiate kubeadm cluster..." && sleep 1
+  ### Initiate Kubeadm
+  echo "Initiate Kubeadm cluster..." && sleep 2
+  [ -f /vagrant/kubemasterOutput.txt ] && echo > /vagrant/kubemasterOutput.txt
+
   ### For Vagrant/Virtualbox environments you need to set --apiserver-advertise-address=$IP
   kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=$IP | tee -a /vagrant/kubemasterOutput.txt
 
   setupKubectl
 
   ### Install network add-on for Calico
-  echo "Install network add-on for Calico..." && sleep 1
+  echo "Install network add-on for Calico..." && sleep 2
   kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml
 
   tail -2 /vagrant/kubemasterOutput.txt > /vagrant/setupWorker.sh && chmod +x /vagrant/setupWorker.sh
@@ -46,13 +48,13 @@ setupMaster(){
 
 
 setupWorker(){
-  ### Initiate kubeadm join to cluster
-  echo "Initiate kubeadm join to cluster..." && sleep 1
+  ### Initiate Kubeadm join to cluster
+  echo "Initiate Kubeadm join to cluster..." && sleep 2
   /vagrant/setupWorker.sh
 
   ### Related to --apiserver-advertise-address parameter on master node.
   ### This allows the worker node to avertise the correct IP.
-  echo Environment="'KUBELET_EXTRA_ARGS=--node-ip=$IP'" | sudo tee -a /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+  echo Environment="'KUBELET_EXTRA_ARGS=--node-ip=$IP'" | tee -a /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 
   systemctl daemon-reload && systemctl restart kubelet
 
@@ -63,7 +65,7 @@ setupWorker(){
 ### Install Docker CE
 ### Set up the repository:
 ### Install packages to allow apt to use a repository over HTTPS
-echo "Update and install Docker CE..." && sleep 1
+echo "Update and install Docker CE..." && sleep 2
 apt-get update && apt-get install -y apt-transport-https ca-certificates curl software-properties-common gnupg-agent
 
 ### Add Docker’s official GPG key
@@ -101,8 +103,8 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system
 
-### Install kubeadm/kublet
-echo "Install kubeadm/kublet..." && sleep 1
+### Install Kubeadm/Kublet
+echo "Install Kubeadm/Kublet..." && sleep 2
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl etcd-client
 
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
