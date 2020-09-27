@@ -11,12 +11,7 @@ Virtualbox: https://www.virtualbox.org/wiki/Downloads
 The Vagrant images are based on [Ubuntu Bionic64](https://app.vagrantup.com/ubuntu/boxes/bionic64). There's no real preference for Ubuntu besides me wanting to use it.  Please feel free to refer to the [Kubeadm documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl) for instrucions on installing on other Linux distributions.
 
 ## Clone and Install
-
-```Bash
-git clone https://github.com/james-daniels/kubelab.git
-
-cd kubelab
-```
+Clone this repo. 
 
 Edit the Vagrantfile to suit your resource requirements.  In this configuration, there's a 1 master, 2 worker node cluster.
 
