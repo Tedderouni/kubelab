@@ -1,0 +1,4 @@
+*.log
+.vagrant
+kubemasterOutput.txt
+setupWorker.sh
