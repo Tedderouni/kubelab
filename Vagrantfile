@@ -19,6 +19,7 @@ Vagrant.configure("2") do |config|
       vb.memory = MASTER_RAM
     end
     kubeconfig.vm.provision "shell", inline: "sudo /vagrant/installKubernetes.sh master"
+    kubeconfig.vm.provision "shell", inline: "sudo /vagrant/installHelm.sh"
   end
 
   (1..WORKER_COUNT).each do |i|
